@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bank{% endblock %}
+
+{% block links %}
+    <script src="{% static 'js/bank.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bank.css' %}">
+{% endblock %}
+
+{% block body %}
+    Welcome to the bank.
+    <ul>
+        <li><a href="{% url 'config:bank:scan_card' %}">User Profile</a></li>
+        <li><a href="{% url 'config:bank:total_money' %}">Total Money in the bank</a></li>
+    </ul>
+    {% if total_money %}
+        Total money: {{ total_money }}
+        <ul>
+        {% for card in cards %}
+            <li>{{ card.holder }}: {{ card.balance }} kudos</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

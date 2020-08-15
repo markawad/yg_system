@@ -1,0 +1,51 @@
+{% extends 'bank/home.html' %}
+
+{% block body %}
+    <form action="{% url 'config:bank:scan_card' %}">
+      <label for="card_number">Please enter the card number:</label><br>
+      <input type="text" id="card_number" name="card_number" value="{{ num }}"><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    {% if student %}
+        <ul>
+        <li>Name: {{ student.first_name }} {{ student.middle_name }} {{ student.last_name }}</li>
+        <li>Balance: {{ student.card.balance }}</li>
+        </ul>
+
+        <button id="deposit" type="button" onclick="display_deposit_box()">Deposit:</button>
+        <button id="withdraw" type="button" onclick="display_withdraw_box()">Withdraw:</button>
+
+        <div id="deposit_box">
+            <form action="{% url 'config:bank:deposit' student.card.number %}">
+                <label for="amount">Please enter the amount to deposit:</label><br>
+                <input type="text" id="amount" name="amount" value="{{ num }}"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div id="withdraw_box">
+            <form action="{% url 'config:bank:withdraw' student.card.number %}">
+                <label for="amount">Please enter the amount to withdraw:</label><br>
+                <input type="text" id="amount" name="amount" value="{{ num }}"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div id="transactions">
+            <ul>
+                {% for transaction in transactions %}
+                <li>{{ transaction }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% endif %}
+
+    {% if err %}
+        {{ err }}
+    {% endif %}
+    {% if success %}
+        {{ success }}
+    {% endif %}
+{% endblock %}

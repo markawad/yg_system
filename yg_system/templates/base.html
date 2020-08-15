@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block links %}
+    {% endblock %}
+</head>
+<body>
+<a href="{% url 'config:home_page' %}">Home</a> |
+<a href="{% url 'config:bank:home_page' %}">Bank</a>
+<a href="{% url 'admin:index' %}">Admin</a>
+<a href="{% url 'config:attendance:home_page' %}">Attendance</a>
+<div>
+    {% block body %}
+    {% endblock %}
+</div>
+</body>
+</html>
