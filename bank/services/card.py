@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 class CardService:
 
     @staticmethod
-    def create_card(holder):
-        return Card.objects.create(holder=holder)
+    def create_card(holder, number):
+        return Card.objects.create(holder=holder, number=number)
 
     @staticmethod
     def save(card):

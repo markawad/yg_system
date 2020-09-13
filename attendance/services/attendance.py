@@ -15,10 +15,10 @@ class AttendanceService:
         self.reset_multiplier_if_absent_last_time(student=card_holder,
                                                   sunday_school=sunday_school,
                                                   bible_study=bible_study)
+        Attendance.objects.create(student=card_holder, day=day)
         MultiplierService().increment_multiplier(student=card_holder,
                                                  sunday_school=sunday_school,
                                                  bible_study=bible_study)
-        Attendance.objects.create(student=card_holder, day=day)
 
     def add_attendance_by_card(self, card, for_sunday_school=False, for_bible_study=False):
         self.add_attendance(card_holder=card.holder, sunday_school=for_sunday_school, bible_study=for_bible_study)

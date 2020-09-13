@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 class TransactionTestCase(BaseTestCase):
 
     def test_deposit_transaction_created(self):
-        card = CardService().create_card(holder=self.student)
+        card = CardService().create_card(holder=self.student, number=1234)
         CardService().deposit_money(card=card, amount=50)
         count = TransactionSelector().get_total_transaction_count()
         self.assertEqual(count, 1)
@@ -17,7 +17,7 @@ class TransactionTestCase(BaseTestCase):
                       str(transaction))
 
     def test_validation_error_raised_for_more_than_for(self):
-        card = CardService().create_card(holder=self.student)
+        card = CardService().create_card(holder=self.student, number=1234)
         with self.assertRaisesMessage(ValidationError, 'Transaction: Only one for needs to be true.'):
             TransactionService().create_transaction(card=card,
                                                     amount=50,
@@ -31,7 +31,7 @@ class TransactionTestCase(BaseTestCase):
                                                     for_attendance=True)
 
     def test_withdrawing_transaction_is_negative(self):
-        card = CardService().create_card(holder=self.student)
+        card = CardService().create_card(holder=self.student, number=1234)
         CardService().deposit_money(card=card, amount=50)
 
         CardService().withdraw_money(card=card, amount=50)

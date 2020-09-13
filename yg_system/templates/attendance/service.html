@@ -1,0 +1,12 @@
+{% extends 'attendance/home.html' %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    <form action="{% url 'config:attendance:ss_attendance' %}" method="post">
+      {% csrf_token %}
+      <label for="card_number">Please enter the card number:</label><br>
+      <input type="text" id="card_number" name="card_number"><br>
+      <input type="submit" value="Submit">
+    </form>
+{% endblock %}

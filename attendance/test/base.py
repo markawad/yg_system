@@ -42,8 +42,8 @@ class BaseTestCase(TestCase):
                                                father_of_confession='Father',
                                                servant=self.servant,
                                                residency_area='Prague')
-        self.card1 = CardService().create_card(self.student1)
-        self.card2 = CardService().create_card(self.student2)
+        self.card1 = CardService().create_card(self.student1, number=1234)
+        self.card2 = CardService().create_card(self.student2, number=1234)
 
         Bonus.objects.create(WEEK=5, MONTH=10, QUARTER=25)
 

@@ -102,3 +102,10 @@ class AttendanceTestCase(BaseTestCase):
     def test_transaction_recorded_when_attendance_money_is_added(self):
         AttendanceService().add_attendance_by_card(self.card1)
         self.assertEqual(self.card1.transactions.count(), 1)
+
+    def test_student_has_same_multiplier_when_being_added_twice_for_same_day(self):
+        AttendanceService().add_attendance_by_card(self.card1)
+        with self.assertRaises(IntegrityError):
+            AttendanceService().add_attendance_by_card(self.card1)
+            multiplier = MultiplierSelector().get_multiplier_for_specific_service_value(self.card1.holder)
+            self.assertEqual(multiplier, 1)
