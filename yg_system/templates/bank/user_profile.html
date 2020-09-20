@@ -3,7 +3,7 @@
 {% block body %}
     <form action="{% url 'config:bank:scan_card' %}">
       <label for="card_number">Please enter the card number:</label><br>
-      <input type="text" id="card_number" name="card_number" value="{{ num }}"><br>
+      <input type="number" id="card_number" name="card_number" value="{{ num }}"><br>
       <input type="submit" value="Submit">
     </form>
 
@@ -19,7 +19,7 @@
         <div id="deposit_box">
             <form action="{% url 'config:bank:deposit' student.card.number %}">
                 <label for="amount">Please enter the amount to deposit:</label><br>
-                <input type="text" id="amount" name="amount" value="{{ num }}"><br>
+                <input type="number" id="amount" name="amount" value="{{ num }}"><br>
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -27,7 +27,7 @@
         <div id="withdraw_box">
             <form action="{% url 'config:bank:withdraw' student.card.number %}">
                 <label for="amount">Please enter the amount to withdraw:</label><br>
-                <input type="text" id="amount" name="amount" value="{{ num }}"><br>
+                <input type="number" id="amount" name="amount" value="{{ num }}"><br>
                 <input type="submit" value="Submit">
             </form>
         </div>

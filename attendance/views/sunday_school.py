@@ -5,4 +5,4 @@ def sunday_school(request):
     context = {
         'title': "Sunday School"
     }
-    return render(request, 'attendance/service.html', context)
+    return render(request, 'attendance/sunday_school.html', context)
