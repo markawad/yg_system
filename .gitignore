@@ -1,1 +1,3 @@
 funcionality.txt
+*__pycache__*
+db.sqlite3
