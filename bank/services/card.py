@@ -28,14 +28,14 @@ class CardService:
         self.validate_balance_greater_than_withdrawn(card=card, amount=amount)
 
         if int(amount) != amount:
-            raise ValidationError('Cannot withdraw in decimals')
+            raise ValidationError('Cannot withdraw in decimals.')
         card.balance -= amount
         self.save(card)
 
     @staticmethod
     def validate_balance_greater_than_withdrawn(card, amount):
         if card.balance < amount:
-            raise ValidationError('Cannot withdraw more than actual balance')
+            raise ValidationError('Cannot withdraw more than actual balance.')
 
     def deposit_money(self, card, amount):
         self.add_money(card=card, amount=amount)
