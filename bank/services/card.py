@@ -26,7 +26,11 @@ class CardService:
     def add_money(self, card, amount):
         self.validate_max_per_transaction(card=card, amount=amount)
         self.validate_negative_input(amount)
-        card.balance += round(amount)
+
+        if not isinstance(amount, int):
+            raise ValidationError('Cannot deposit in decimals.')
+
+        card.balance += amount
         self.save(card)
 
     def take_money(self, card, amount):
@@ -34,7 +38,7 @@ class CardService:
         self.validate_negative_input(amount)
         self.validate_balance_greater_than_withdrawn(card=card, amount=amount)
 
-        if int(amount) != amount:
+        if not isinstance(amount, int):
             raise ValidationError('Cannot withdraw in decimals.')
         card.balance -= amount
         self.save(card)

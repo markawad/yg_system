@@ -43,13 +43,10 @@ class CardTestCase(BaseTestCase):
         with self.assertRaisesMessage(ValidationError, 'Amount exceeds maximum transaction limit'):
             CardService().take_money(card=card, amount=150)
 
-    def test_balance_rounds_decimals_correctly(self):
+    def test_cannot_deposit_in_decimals(self):
         card = CardService().create_card(holder=self.student, number=1234)
-        CardService().add_money(card=card, amount=10.4)
-        self.assertEqual(card.balance, 10)
-
-        CardService().add_money(card=card, amount=10.6)
-        self.assertEqual(card.balance, 21)
+        with self.assertRaisesMessage(ValidationError, 'Cannot deposit in decimals.'):
+            CardService().deposit_money(card=card, amount=9.7)
 
     def test_cannot_withdraw_in_decimals(self):
         card = CardService().create_card(holder=self.student, number=1234)
@@ -60,9 +57,9 @@ class CardTestCase(BaseTestCase):
     def test_cannot_deposit_negative_values(self):
         card = CardService().create_card(holder=self.student, number=1234)
         with self.assertRaisesMessage(ValidationError, 'Negative values are not accepted.'):
-            CardService().deposit_money(card, -20)
+            CardService().deposit_money(card=card, amount=-20)
 
     def test_cannot_withdraw_negative_values(self):
         card = CardService().create_card(holder=self.student, number=1234)
         with self.assertRaisesMessage(ValidationError, 'Negative values are not accepted.'):
-            CardService().withdraw_money(card, -20)
+            CardService().withdraw_money(card=card, amount=-20)
