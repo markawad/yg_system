@@ -13,18 +13,25 @@ class CardService:
     def save(card):
         return card.save()
 
-    def add_money(self, card, amount):
-        self.validate_max_per_transaction(card=card, amount=amount)
-        card.balance += round(amount)
-        self.save(card)
-
     @staticmethod
     def validate_max_per_transaction(card, amount):
         if amount > card.max_transaction:
             raise ValidationError('Amount exceeds maximum transaction limit.')
 
+    @staticmethod
+    def validate_negative_input(amount):
+        if amount < 0:
+            raise ValidationError('Negative values are not accepted.')
+
+    def add_money(self, card, amount):
+        self.validate_max_per_transaction(card=card, amount=amount)
+        self.validate_negative_input(amount)
+        card.balance += round(amount)
+        self.save(card)
+
     def take_money(self, card, amount):
         self.validate_max_per_transaction(card=card, amount=amount)
+        self.validate_negative_input(amount)
         self.validate_balance_greater_than_withdrawn(card=card, amount=amount)
 
         if int(amount) != amount:

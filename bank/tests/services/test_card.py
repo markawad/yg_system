@@ -56,3 +56,13 @@ class CardTestCase(BaseTestCase):
         CardService().add_money(card=card, amount=10)
         with self.assertRaisesMessage(ValidationError, 'Cannot withdraw in decimals'):
             CardService().withdraw_money(card=card, amount=9.7)
+
+    def test_cannot_deposit_negative_values(self):
+        card = CardService().create_card(holder=self.student, number=1234)
+        with self.assertRaisesMessage(ValidationError, 'Negative values are not accepted.'):
+            CardService().deposit_money(card, -20)
+
+    def test_cannot_withdraw_negative_values(self):
+        card = CardService().create_card(holder=self.student, number=1234)
+        with self.assertRaisesMessage(ValidationError, 'Negative values are not accepted.'):
+            CardService().withdraw_money(card, -20)
