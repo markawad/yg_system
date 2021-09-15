@@ -17,7 +17,7 @@ class Card(models.Model):
 
     type = models.CharField(max_length=15, choices=CardType.choices, default=CardType.BASIC)
     balance = models.PositiveIntegerField(default=0)
-    max_transaction = models.PositiveIntegerField(default=100)
+    max_transaction = models.PositiveIntegerField(default=500)
 
     def get_absolute_url(self):
         from django.urls import reverse
