@@ -19,13 +19,14 @@ class Student(models.Model):
     )
     school = models.CharField(max_length=50)
     phone = PhoneField(help_text='Contact phone number')
-    mothers_number = PhoneField(help_text='Mother\'s contact phone number')
-    fathers_number = PhoneField(help_text='Father\'s contact phone number')
-    father_of_confession = models.CharField(max_length=50)
+    mothers_number = PhoneField(help_text='Mother\'s contact phone number', blank=True, null=True)
+    fathers_number = PhoneField(help_text='Father\'s contact phone number', blank=True, null=True)
+    father_of_confession = models.CharField(max_length=50, blank=True, null=True)
     servant = models.ForeignKey(
         Servant,
         related_name='students',
         on_delete=models.SET_NULL,
+        blank=True,
         null=True
     )
     residency_area = models.CharField(max_length=50)
