@@ -11,5 +11,8 @@ urlpatterns = [
     path('sunday_school/card', views.card_attendance_sunday_school, name='ss_attendance'),
     path('bible_study/card', views.card_attendance_bible_study, name='bs_attendance'),
     path('summer_club/card', views.card_attendance_summer_club, name='sc_attendance'),
+    path('sunday_school/name', views.name_attendance_sunday_school, name='ss_attendance_name'),
+    path('bible_study/name', views.name_attendance_bible_study, name='bs_attendance_name'),
+    path('summer_club/name', views.name_attendance_summer_club, name='sc_attendance_name'),
 
 ]
