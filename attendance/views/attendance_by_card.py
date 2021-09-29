@@ -11,6 +11,10 @@ student_names = StudentSelector().get_all_student_names()
 
 
 def card_attendance_sunday_school(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, card = '', ''
     card_number = request.POST['card_number']
 
@@ -32,6 +36,10 @@ def card_attendance_sunday_school(request):
 
 
 def card_attendance_bible_study(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, card = '', ''
     card_number = request.POST['card_number']
 
@@ -53,6 +61,10 @@ def card_attendance_bible_study(request):
 
 
 def card_attendance_summer_club(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, card = '', ''
     card_number = request.POST['card_number']
 

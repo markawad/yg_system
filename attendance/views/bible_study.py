@@ -4,6 +4,10 @@ from config.selectors.student import StudentSelector
 
 
 def bible_study(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     context = {
         'title': "Bible Study",
         'student_names': StudentSelector().get_all_student_names(),

@@ -4,6 +4,10 @@ from config.selectors.student import StudentSelector
 
 
 def summer_club(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     context = {
         'title': "Summer Club",
         'student_names': StudentSelector().get_all_student_names(),

@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from bank.selectors.card import CardSelector
 from bank.selectors.transaction import TransactionSelector
 from django.core.exceptions import ObjectDoesNotExist
 
 
 def user_profile(request, card_number):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     # Card does not exist
     try:
         student = CardSelector().get_student_by_card_number(card_number)

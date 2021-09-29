@@ -4,6 +4,10 @@ from config.selectors.student import StudentSelector
 
 
 def sunday_school(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     context = {
         'title': "Sunday School",
         'student_names': StudentSelector().get_all_student_names(),

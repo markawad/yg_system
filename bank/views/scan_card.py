@@ -4,6 +4,10 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def scan_card(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     if 'card_number' not in request.GET:
         return render(request, 'bank/user_profile.html')
     try:

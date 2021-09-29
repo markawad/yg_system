@@ -6,6 +6,10 @@ from django.core.exceptions import ValidationError
 
 
 def deposit_money(request, card_number):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     # If no card is inserted
     if 'amount' not in request.GET:
         card = CardSelector().get_card_by_number(card_number)

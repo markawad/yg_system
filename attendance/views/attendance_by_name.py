@@ -10,6 +10,10 @@ student_names = StudentSelector().get_all_student_names()
 
 
 def name_attendance_sunday_school(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, student = '', ''
     full_name = request.POST['full_name']
 
@@ -30,6 +34,10 @@ def name_attendance_sunday_school(request):
 
 
 def name_attendance_bible_study(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, student = '', ''
     full_name = request.POST['full_name']
 
@@ -50,6 +58,10 @@ def name_attendance_bible_study(request):
 
 
 def name_attendance_summer_club(request):
+
+    if not request.user.is_authenticated:
+        return redirect('config:login')
+
     err, student = '', ''
     full_name = request.POST['full_name']
 
