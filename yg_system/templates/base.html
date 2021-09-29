@@ -11,6 +11,11 @@
 <a href="{% url 'config:bank:home_page' %}">Bank</a>
 <a href="{% url 'admin:index' %}">Admin</a>
 <a href="{% url 'config:attendance:home_page' %}">Attendance</a>
+{% if user.is_authenticated %}
+  <a href="{% url 'config:logout' %}">Log Out</a>
+{% else %}
+  <a href="{% url 'config:login' %}">Log In</a>
+{% endif %}
 <div>
     {% block body %}
     {% endblock %}

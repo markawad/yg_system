@@ -13,7 +13,7 @@
     <form action="{% url 'config:attendance:ss_attendance_name' %}" method="post">
       {% csrf_token %}
       <label for="card_number">Please enter the student's name:</label><br>
-      <input id="full_name" name="full_name" list="Full Name" ><br>
+      <input id="full_name" name="full_name" list="Full Name"><br>
         <datalist id="Full Name">
         {% for student in student_names %}
             <option value="{{ student }}">
@@ -21,6 +21,8 @@
         </datalist>
       <input type="submit" value="Submit">
     </form>
+
+    <p>Attendance Count: {{ attendance_count }}</p>
 
     {% if err %}
         <p>{{ err }}</p>

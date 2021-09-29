@@ -19,6 +19,6 @@ from django.contrib import admin
 app_name = 'yg_system'
 
 urlpatterns = [
-    path('', include('config.urls')),
+    path('', include('config.urls'),),
     path('admin/', admin.site.urls),
 ]
