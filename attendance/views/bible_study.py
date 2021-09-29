@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from attendance.selectors.attendance import AttendanceSelector
 from config.selectors.student import StudentSelector
+from django.http import HttpResponse
 
 
 def bible_study(request):
 
     if not request.user.is_authenticated:
         return redirect('config:login')
+    if request.user.username != 'admin':
+        return HttpResponse('Unauthorized', status=401)
 
     context = {
         'title': "Bible Study",

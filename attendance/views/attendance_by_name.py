@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from config.selectors.student import StudentSelector
 from attendance.selectors.attendance import AttendanceSelector
+from django.http import HttpResponse
 
 
 student_names = StudentSelector().get_all_student_names()
@@ -13,6 +14,8 @@ def name_attendance_sunday_school(request):
 
     if not request.user.is_authenticated:
         return redirect('config:login')
+    if request.user.username != 'admin':
+        return HttpResponse('Unauthorized', status=401)
 
     err, student = '', ''
     full_name = request.POST['full_name']
@@ -37,6 +40,8 @@ def name_attendance_bible_study(request):
 
     if not request.user.is_authenticated:
         return redirect('config:login')
+    if request.user.username != 'admin':
+        return HttpResponse('Unauthorized', status=401)
 
     err, student = '', ''
     full_name = request.POST['full_name']
@@ -61,6 +66,8 @@ def name_attendance_summer_club(request):
 
     if not request.user.is_authenticated:
         return redirect('config:login')
+    if request.user.username != 'admin':
+        return HttpResponse('Unauthorized', status=401)
 
     err, student = '', ''
     full_name = request.POST['full_name']
