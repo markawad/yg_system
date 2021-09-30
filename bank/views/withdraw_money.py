@@ -22,12 +22,14 @@ def withdraw_money(request, card_number):
     try:
         card = CardSelector().get_card_by_number(card_number)
         CardService().withdraw_money(card=card, amount=int(request.GET['amount']))
-    # Incorrect amount
-    except ValueError:
-        err = 'Please enter a correct number.'
+    # Incorrect amount / negative values
+    except ValueError as e:
+        ex = ''.join(list(e))
+        err = f'Error: {ex}'
     # If amount exceeds max
-    except ValidationError:
-        err = 'Amount exceeds max limit.'
+    except ValidationError as e:
+        ex = ''.join(list(e))
+        err = f'Error: {ex}'
     if not err:
         success = f'{request.GET["amount"]} removed from the card successfully.'
 
