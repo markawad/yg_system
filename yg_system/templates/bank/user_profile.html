@@ -17,7 +17,8 @@
         <button id="withdraw" type="button" onclick="display_withdraw_box()">Withdraw:</button>
 
         <div id="deposit_box">
-            <form action="{% url 'config:bank:deposit' student.card.number %}">
+            <form action="{% url 'config:bank:deposit' student.card.number %}" method="post">
+                {% csrf_token %}
                 <label for="amount">Please enter the amount to deposit:</label><br>
                 <input type="number" id="amount" name="amount" value="{{ num }}"><br>
                 <input type="submit" value="Submit">
@@ -25,7 +26,8 @@
         </div>
 
         <div id="withdraw_box">
-            <form action="{% url 'config:bank:withdraw' student.card.number %}">
+            <form action="{% url 'config:bank:withdraw' student.card.number %}" method="post">
+                {% csrf_token %}
                 <label for="amount">Please enter the amount to withdraw:</label><br>
                 <input type="number" id="amount" name="amount" value="{{ num }}"><br>
                 <input type="submit" value="Submit">

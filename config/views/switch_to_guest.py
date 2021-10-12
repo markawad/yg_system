@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, login, logout
 
 
 def switch_to_guest(request):
@@ -9,5 +9,6 @@ def switch_to_guest(request):
 
     logout(request)
     user = authenticate(username='guest', password='iamnotanadmin')
-    request.user = user
+    login(request, user)
+    
     return render(request, 'bank/home.html')
