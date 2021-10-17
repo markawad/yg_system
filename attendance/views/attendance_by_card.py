@@ -8,9 +8,6 @@ from attendance.selectors.attendance import AttendanceSelector
 from django.http import HttpResponse
 
 
-student_names = StudentSelector().get_all_student_names()
-
-
 def card_attendance_sunday_school(request):
 
     if not request.user.is_authenticated:
@@ -20,6 +17,7 @@ def card_attendance_sunday_school(request):
 
     err, card = '', ''
     card_number = request.POST['card_number']
+    student_names = StudentSelector().get_all_student_names()
 
     try:
         card = CardSelector().get_card_by_number(card_number)
@@ -47,6 +45,7 @@ def card_attendance_bible_study(request):
 
     err, card = '', ''
     card_number = request.POST['card_number']
+    student_names = StudentSelector().get_all_student_names()
 
     try:
         card = CardSelector().get_card_by_number(card_number)
@@ -74,6 +73,7 @@ def card_attendance_summer_club(request):
 
     err, card = '', ''
     card_number = request.POST['card_number']
+    student_names = StudentSelector().get_all_student_names()
 
     try:
         card = CardSelector().get_card_by_number(card_number)
