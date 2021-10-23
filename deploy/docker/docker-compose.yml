@@ -1,5 +1,20 @@
 version: '3'
 services:
+  postgres:
+    image: postgres:11.1-alpine
+    build:
+      context: $WORK_DIR
+      shm_size: '2gb'
+    shm_size: '2gb'
+    container_name: postgres
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASS
+    ports:
+      - 5432:5432
+    volumes:
+      - $WORK_DIR/data:/var/lib/postgresql/data
   app:
     container_name: app
     build:
@@ -11,8 +26,9 @@ services:
       - .env
     volumes:
       - $WORK_DIR:$APP
-    networks:
-      - nginx_network
+      - $STATIC_DIR:/static:z
+    depends_on:
+      - 'postgres'
   nginx:
     container_name: nginx
     image: nginx:1.21-alpine
@@ -20,11 +36,8 @@ services:
       - 80:80
     volumes:
       - ./nginx:/etc/nginx/conf.d
+      - $STATIC_DIR:/static:z
     depends_on:
       - app
-    networks:
-      - nginx_network
-
-networks:
-  nginx_network:
-    driver: bridge
+volumes:
+  pgdata:

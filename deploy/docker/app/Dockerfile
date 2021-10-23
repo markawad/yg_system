@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY . $APP
-RUN pip3 install -r requirements.txt && \
+RUN rm db.spip3 install -r requirements.txt && \
     python3 manage.py collectstatic --noinput && \
     python3 manage.py makemigrations && \
     python3 manage.py makemigrations config bank attendance && \
