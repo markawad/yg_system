@@ -39,5 +39,3 @@ services:
       - $STATIC_DIR:/static:z
     depends_on:
       - app
-volumes:
-  pgdata:
