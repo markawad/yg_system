@@ -2,10 +2,6 @@ version: '3'
 services:
   postgres:
     image: postgres:11.1-alpine
-    build:
-      context: $WORK_DIR
-      shm_size: '2gb'
-    shm_size: '2gb'
     container_name: postgres
     environment:
       POSTGRES_DB: $DB_NAME

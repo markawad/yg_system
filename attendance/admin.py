@@ -16,7 +16,8 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Multiplier)
 class UserAdmin(admin.ModelAdmin):
-    pass
+    def has_add_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(StartYear)

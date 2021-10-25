@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ConfigConfig(AppConfig):
     name = 'config'
-    verbose_name = 'Settings'
+    verbose_name = 'YG Users'

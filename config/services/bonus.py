@@ -12,3 +12,7 @@ class BonusService:
     @staticmethod
     def record_exists() -> bool:
         return Bonus.objects.count()
+
+    def add_bonus_values_if_not_exists(self, week, month, quarter):
+        if not self.record_exists():
+            return Bonus.objects.create(WEEK=week, MONTH=month, QUARTER=quarter)

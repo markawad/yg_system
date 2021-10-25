@@ -10,11 +10,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY . $APP
-RUN rm db.spip3 install -r requirements.txt && \
-    python3 manage.py collectstatic --noinput && \
-    python3 manage.py makemigrations && \
-    python3 manage.py makemigrations config bank attendance && \
-    python3 manage.py migrate
+RUN pip3 install -r requirements.txt && \
+    python3 manage.py collectstatic --noinput
 
 EXPOSE 80
-CMD ["gunicorn", "--bind", ":80", "yg_system.wsgi:application"]
+ENTRYPOINT ["/app/deploy/docker/app/docker-entrypoint.sh"]
