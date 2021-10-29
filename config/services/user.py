@@ -14,7 +14,8 @@ class UserService:
 
     @staticmethod
     def create_admin_if_doesnt_exist() -> User:
-        return User.objects.get_or_create(username=os.environ.get('DJANGO_SUPERUSER_USERNAME', 'admin'),
-                                          password=os.environ.get('DJANGO_SUPERUSER_PASSWORD'),
-                                          is_superuser=True,
-                                          is_staff=True)
+        if not User.objects.filter(username='admin').exists():
+            return User.objects.create(username=os.environ.get('DJANGO_SUPERUSER_USERNAME', 'admin'),
+                                       password=os.environ.get('DJANGO_SUPERUSER_PASSWORD'),
+                                       is_superuser=True,
+                                       is_staff=True)
