@@ -18,7 +18,6 @@ python3 manage.py migrate
 
 # Add initial configs
 echo "Running initial configuration"
-python3 manage.py createsuperuser --noinput
 python3 manage.py shell < $PWD/deploy/docker/app/init_db.py
 
 # Start server
