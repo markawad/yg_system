@@ -3,7 +3,7 @@ from config.models.student import Student
 
 
 class Card(models.Model):
-    number = models.BigIntegerField()
+    number = models.BigIntegerField(unique=True)
     holder = models.OneToOneField(
         Student,
         related_name='card',
