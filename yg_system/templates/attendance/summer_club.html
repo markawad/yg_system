@@ -6,7 +6,7 @@
     <form action="{% url 'config:attendance:sc_attendance' %}" method="post">
       {% csrf_token %}
       <label for="card_number">Please enter the card number:</label><br>
-      <input type="number" id="card_number" name="card_number"><br>
+      <input type="number" id="card_number" name="card_number" autofocus><br>
       <input type="submit" value="Submit">
     </form>
 
