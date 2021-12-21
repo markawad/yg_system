@@ -11,5 +11,12 @@ class Day(models.Model):
     class Meta:
         unique_together = ('date', 'for_sunday_school', 'for_bible_study')
 
+    def get_service(self) -> str:
+        if self.for_sunday_school:
+            return 'Sunday School'
+        elif self.for_bible_study:
+            return 'Bible Study'
+        return 'Summer Club'
+
     def __str__(self):
         return str(self.date)

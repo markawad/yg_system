@@ -1,6 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 from attendance.models.attendance import Attendance
 from attendance.selectors.day import DaySelector
+from config.selectors.student import StudentSelector
+from datetime import datetime
 
 
 class AttendanceSelector:
@@ -12,3 +14,10 @@ class AttendanceSelector:
                                                                       for_bible_study=for_bible_study)).count()
         except ObjectDoesNotExist:
             return 0
+
+    @staticmethod
+    def get_unattended_students_by_day(day: datetime.date) -> set:
+        attendence_objs = Attendance.objects.filter(day=day).select_related('student')
+        attended_students = {attendance.student for attendance in attendence_objs}
+
+        return StudentSelector.get_all_students() - attended_students

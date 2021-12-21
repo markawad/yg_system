@@ -1,4 +1,4 @@
-from attendance.test.base import BaseTestCase
+from attendance.tests.base import BaseTestCase
 from attendance.services import DayService, AttendanceService
 from attendance.selectors.multiplier import MultiplierSelector
 from django.db import IntegrityError

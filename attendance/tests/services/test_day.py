@@ -1,4 +1,4 @@
-from attendance.test.base import BaseTestCase
+from attendance.tests.base import BaseTestCase
 from attendance.services.day import DayService
 from attendance.selectors.day import DaySelector
 from attendance.models.day import Day

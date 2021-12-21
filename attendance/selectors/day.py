@@ -1,6 +1,8 @@
+from typing import Optional
+
 from attendance.models.day import Day
 from django.utils import timezone
-from django.db import IntegrityError
+from datetime import timedelta
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -25,5 +27,13 @@ class DaySelector:
             return Day.objects.filter(date__lt=timezone.localdate().today(),
                                       for_sunday_school=for_sunday_school,
                                       for_bible_study=for_bible_study).order_by('-date').first()
+        except ObjectDoesNotExist:
+            return None
+
+    @staticmethod
+    def get_yesterday_or_none() -> Optional[Day]:
+        yesterday = timezone.localdate().today() - timedelta(1)
+        try:
+            return Day.objects.filter(date=yesterday).first()
         except ObjectDoesNotExist:
             return None

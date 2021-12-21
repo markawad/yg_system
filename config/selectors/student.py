@@ -18,3 +18,7 @@ class StudentSelector:
     def get_all_student_names():
         return [student.first_name + " " + student.middle_name + " " + student.last_name
                 for student in Student.objects.all()]
+
+    @staticmethod
+    def get_all_students() -> set:
+        return {Student.objects.all()}
