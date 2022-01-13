@@ -10,3 +10,6 @@ class Attendance(models.Model):
 
     class Meta:
         unique_together = ('student', 'day')
+
+    def __str__(self):
+        return f'{self.day.get_service()} - {self.day.date}: {self.student}'
