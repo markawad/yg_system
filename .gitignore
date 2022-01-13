@@ -6,3 +6,4 @@ db.sqlite3
 deploy/docker/.env
 data
 static
+geckodriver.log

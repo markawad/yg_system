@@ -7,17 +7,17 @@
 
     <form action="{% url 'config:attendance:bible_study' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="Bible Study">
+      <input id="id_bible_study" type="submit" value="Bible Study">
     </form>
 
     <form action="{% url 'config:attendance:sunday_school' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="Sunday School">
+      <input id="id_sunday_school" type="submit" value="Sunday School">
     </form>
 
     <form action="{% url 'config:attendance:summer_club' %}" method="post">
       {% csrf_token %}
-      <input type="submit" value="Summer Club">
+      <input id="id_summer_club" type="submit" value="Summer Club">
     </form>
 
 {% endblock %}
