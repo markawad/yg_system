@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED 1
 COPY . $APP
 RUN pip3 install -r requirements.txt && \
     python3 manage.py collectstatic --noinput && \
-    python3 manage.py test
+    python3 manage.py test config attendance bank
 
 EXPOSE 80
 ENTRYPOINT ["/app/deploy/docker/app/docker-entrypoint.sh"]
