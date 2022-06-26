@@ -11,7 +11,7 @@ class DaySelector:
     @staticmethod
     def get_dates_by_month(month, for_sunday_school=False, for_bible_study=False):
         return Day.objects.filter(date__month=month,
-                                  date__year=timezone.localdate().today(),
+                                  date__year=timezone.localdate().today().year,
                                   for_sunday_school=for_sunday_school,
                                   for_bible_study=for_bible_study)
 
