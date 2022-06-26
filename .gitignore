@@ -7,3 +7,4 @@ deploy/docker/.env
 data
 static
 geckodriver.log
+*migrations*
