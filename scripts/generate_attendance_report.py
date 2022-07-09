@@ -13,8 +13,8 @@ MONTH = os.environ.get('MONTH')
 days = DaySelector().get_dates_by_month(month=MONTH, for_sunday_school=True)
 all_students = StudentSelector().get_all_students()
 
-with open(f'{Path.home()}/attendance_reports/{date.today().strftime("%B").lower()}-attendance_report.csv', 'w',
-          encoding='UTF8', newline='') as f:
+path = f'{os.environ.get("PATH_report", "")}/{date.today().strftime("%B").lower()}-attendance_report.csv'
+with open(path, 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
     writer.writerow([''] + list(days))
