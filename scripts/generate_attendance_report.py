@@ -2,7 +2,6 @@ import os
 import sys
 import csv
 from datetime import date
-from pathlib import Path
 from config.selectors.student import StudentSelector
 from attendance.selectors.day import DaySelector
 
@@ -17,14 +16,14 @@ path = f'{os.environ.get("PATH_report", "")}/{date.today().strftime("%B").lower(
 with open(path, 'w', encoding='UTF8', newline='') as f:
     writer = csv.writer(f)
 
-    writer.writerow([''] + list(days))
+    writer.writerow(['', ''] + list(days))
 
     for student in all_students:
-        line = [str(student)]
+        line = [str(student), student.phone]
         for day in days:
             attendees = day.attendees.all()
             if student in attendees:
-                line.append('present')
-            else:
                 line.append('')
+            else:
+                line.append('absent')
         writer.writerow(line)
