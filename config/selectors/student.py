@@ -20,5 +20,5 @@ class StudentSelector:
                 for student in Student.objects.all()]
 
     @staticmethod
-    def get_all_students() -> set:
-        return {Student.objects.all()}
+    def get_all_students():
+        return Student.objects.all()

@@ -1,10 +1,30 @@
+import os
+import sys
+import csv
+from datetime import date
+from pathlib import Path
+from config.selectors.student import StudentSelector
 from attendance.selectors.day import DaySelector
-from datetime import datetime
 
+if 'MONTH' not in os.environ:
+    sys.exit('Failed to find env \'MONTH\'')
 
-def get_attendance_days_this_month():
-    days = DaySelector().get_dates_by_month(month=datetime.today().month, for_sunday_school=True)
-    print(days)
+MONTH = os.environ.get('MONTH')
+days = DaySelector().get_dates_by_month(month=MONTH, for_sunday_school=True)
+all_students = StudentSelector().get_all_students()
 
+with open(f'{Path.home()}/attendance_reports/{date.today().strftime("%B").lower()}-attendance_report.csv', 'w',
+          encoding='UTF8', newline='') as f:
+    writer = csv.writer(f)
 
-get_attendance_days_this_month()
+    writer.writerow([''] + list(days))
+
+    for student in all_students:
+        line = [str(student)]
+        for day in days:
+            attendees = day.attendees.all()
+            if student in attendees:
+                line.append('present')
+            else:
+                line.append('')
+        writer.writerow(line)
