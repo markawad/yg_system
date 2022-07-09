@@ -23,7 +23,7 @@ services:
     volumes:
       - $WORK_DIR:$APP
       - $STATIC_DIR:/static:z
-      - ~/attendance_reports:/attendance_reports
+      - $ATTENDANCE_DIR:/attendance_reports
     depends_on:
       - 'postgres'
   nginx:
